@@ -18,10 +18,11 @@ Graph: Siehe 01_Graph.png
 
 #### 1:
 (Code in 02_Suchalgorithmen.py)
-BFS: 3 Zyklen, Maximale Stack Größe 4
-DFS: 8 Zyklen, Maximale Queue Größe 4
-A* (Inkonsistent): 8 Zyklen, Maximale Queue Größe 4
-A* (Konsistent): 3 Zyklen, Maximale Queue Größe 4
+
+BFS: 3 Zyklen, Maximale Stack Größe 4  
+DFS: 8 Zyklen, Maximale Queue Größe 4  
+A* (Inkonsistent): 8 Zyklen, Maximale Queue Größe 4  
+A* (Konsistent): 3 Zyklen, Maximale Queue Größe 4  
 
 Man sieht hier, dass A* mit einer konsistenten Heuristik die besten Ergebnisse liefert, während BFS leicht besser als DFS arbeitet. Hier muss aber dazugesagt werden, dass BFS und DFS in ihrer Perfomance je nach Graph, sowie Start- und Zielknoten stark variieren können.
 
@@ -36,4 +37,4 @@ Eine Dominante Heuristik ist eine Heuristik, die in allen Wegschätzungen größ
 
 # Aufgabe 4:
 
-Gegeben sind 2 Endzustände A und B. Der tatsächliche Weg zu A ist günstiger gelegen als der Weg zu B (g(A) < g(B)) und die Heuristik ist konsistent. Durch die Konsistenz muss die Kostenfunktion kleiner oder gleich der tatsächlichen Wegkosten von n zu A sein (f(n) = g(n) + h(n) <= g(n) + h*(n) = g(A) = f(A)), da das Gleiche für B angewendet werden kann, bedeutet das f(A) < f(B), A wird also immer vor B erreicht, was bedeuten muss, dass A* optimal ist.
+Gegeben seien 2 Endzustände A und B. Der tatsächliche Weg zu A ist günstiger gelegen als der Weg zu B (g(A) < g(B)) und die Heuristik ist konsistent. Durch die Konsistenz muss die Kostenfunktion kleiner oder gleich der tatsächlichen Wegkosten von n zu A sein (f(n) = g(n) + h(n) <= g(n) + h*(n) = g(A) = f(A)), da das Gleiche für B angewendet werden kann, bedeutet das f(A) < f(B), A wird also immer vor B erreicht, was bedeuten muss, dass A* optimal ist.
