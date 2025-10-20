@@ -12,7 +12,8 @@ def dfs(start, end):
         cycles += 1
         if len(dfs_stack) > max_stack_size:
             max_stack_size = len(dfs_stack)
-        curr = dfs_stack.pop()
+
+        curr = dfs_stack.pop() # Letztes Element aus der Liste nehmen
         if curr == end:
             print(f"Found {end.name}\nCycles {cycles}, Max Stack Size {max_stack_size}")
             break
@@ -32,36 +33,23 @@ def bfs(start, end):
         cycles += 1
         if len(dfs_queue) > max_stack_size:
             max_stack_size = len(dfs_queue)
-        curr = dfs_queue.pop(0)
+
+        curr = dfs_queue.pop(0) # Erstes Element aus der Liste nehmen
         if curr == end:
-            print(f"Found {end.name}\nCycles {cycles}, Max Stack Size {max_stack_size}")
+            print(f"Found {end.name}\nCycles {cycles}, Max Stack Size {max_stack_size}") # Geforderte Statistiken ausgeben
             break
         else:
             explored.add(curr)
-            dfs_queue.extend(i for i in curr.children if i not in explored and i not in dfs_queue)
+            dfs_queue.extend(i for i in curr.children if i not in explored and i not in dfs_queue) # Queue um alle Nachbarn, die noch nicht bearbeitet wurden ergänzen
 
 
-"""def astar(start, end):
-    ordered_queue = [start]
-    explored = set()
-    cycles = 0
-    max_queue_size = 0
-
-    while ordered_queue:
-        cycles += 1
-        if len(ordered_queue) > max_queue_size:
-            max_queue_size = len(ordered_queue)
-        curr = ordered_queue.pop(0)"""
-
+# Implementation zu A*
 def astar(start, end):
     open_list = [start]
     explored = set()
     cycles = 0
     max_queue_size = 0
-
-    # g-Werte (Kosten vom Start)
     g_score = {start: 0}
-    # Pfadrekonstruktion
     came_from = {}
 
     while open_list:
@@ -69,14 +57,10 @@ def astar(start, end):
         if len(open_list) > max_queue_size:
             max_queue_size = len(open_list)
 
-        # Knoten mit minimalem f(n) = g(n) + h(n) auswählen
-        """current = min(open_list, key=lambda n: g_score.get(n, float('inf')) + n.h)
-        open_list.remove(current)"""
         open_list.sort(key= lambda x: (g_score.get(x, float('inf')) + x.h, x.name)) # Erst nach f(n), dann nach alphabetischer Reihenfolge sortieren
         current = open_list.pop(0)
 
         if current == end:
-            # Pfad zurückverfolgen
             path = [current]
             total_cost = g_score[current]
             while current in came_from:
@@ -87,31 +71,22 @@ def astar(start, end):
             print("A* found path:", " -> ".join(n.name for n in path))
             print(f"Total cost: {total_cost}")
             print(f"Cycles: {cycles}, Max Queue Size: {max_queue_size}")
-            return path
+            break
 
         explored.add(current)
 
-        # Alle Nachbarn untersuchen
         for neighbor in current.children:
             if neighbor in explored:
                 continue
-
-            # Verbindung (Edge) zwischen current und neighbor finden
             edge = next((e for e in current.connections if (e.a == neighbor or e.b == neighbor)), None)
             if edge is None:
                 continue
-
             tentative_g = g_score[current] + edge.cost
-
             if neighbor not in g_score or tentative_g < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = tentative_g
-
                 if neighbor not in open_list:
                     open_list.append(neighbor)
-
-    print("A* found no path.")
-    return None
 
 
 
@@ -172,14 +147,13 @@ if __name__ == '__main__':
     aug.add_connection(aug_mun)
     mun.add_connection(aug_mun)
 
-    # Suchalgorithmen mit Startpunkt Frankfurt und Endpunkt München ausführen
-    dfs(fra, mun)
-    bfs(fra, mun)
+    # Suchalgorithmen mit Startpunkt Würzburg und Endpunkt München ausführen
+    dfs(wur, mun)
+    bfs(wur, mun)
 
-    # Achtung! Heuristik nur gültig für den Zielpunkt München
+    astar(wur, mun)
 
-    astar(fra, mun)
-
+    # Heuristik anpassen, damit sie konsistent ist
     nur.h = 100
 
-    astar(fra, mun)
+    astar(wur, mun)
