@@ -1,4 +1,4 @@
-# Aufgabe 1:
+# Aufgabe 1/2:
 ## 8 Queens:
 Das Problem wird von den Individuen wie folgt beschrieben:  
 Alle Positionen der Damen werden in einem Array gespeichert, der Index beschreibt die Spalte und die Zahl am bestimmten Index beschreibt die Spalte, in der die Dame steht.
@@ -56,3 +56,43 @@ AES: ~7.95
 SR: ~0.385  
 
 ## Fazit:
+Aus den Daten wird klar, dass vor allem die Population den Unterschied in der Erfolgsrate macht. Bei kleinerer Populationsgröße bestehen insgesamt weniger Möglichkeiten zum Kreuzen von Lösungen, ein defizit, was mehr Generationen nicht ausgleichen können.
+Den geringsten Einfluss auf die Resultate hat die Turniergröße, und die Kreuzungswahrscheinlichkeit, was Sinn macht, da der durchschnittliche Durchlauf des Algorithmus schon nach 7-9 Generationen terminiert und beide Funktionen nur kleine, indirekte Effekte auf die Population haben.
+Es scheint, als wären in meiner Implementation die besten Werte eine Populationsgröße von >500 eine maximale Laufzeit von rund 100 Generationen und einer Turniergröße von ca. 10.  
+Die besten Ergebnisse habe ich erzielt, wenn ich das Kreuzen der Eltern mit einer Mutation der Kinder verbunden habe. Ich habe den erstellten pool an Kindern, jeweils mit der Mutationswahrscheinlichkeit 1/Länge des Bitstrings, mutieren lassen und konnte so die Erfolgsrate des Algorithmus auf über 92% steigern, bei einer durchschnittlichen Generationenzahl von ca. 79.  
+(population=100, max_generations=500, tournament_size=10, pcross=0.8, pmut=1/24).
+
+
+
+## Landkarten Einfärben:
+Um das Problem zu lösen habe ich den Algorithmus vom 8 Damen Problem übernommen und die Fitnessfunktion angepasst, um die Anforderungen aus dem Constraint-Graphen abzubilden. Für jede richtige Farbanordnung wird der Fitness-Score um 3 erhöht, und für jede verwendete Farbe wird ein Punkt abgezogen. Wie oben sind verschiedenen Farben als Zahlen kodiert, im Bitstring belegt eine Zahl drei Bits und kann daher die Zahlen von 0 bis 7 darstellen.
+
+## Parameter:
+Stichprobenmenge = 5000
+
+### Unterschiedliche Populationsmengen:
+##### population = 100, max_generations = 500, tournament_size = 10, pcross = 0.8:
+AES: ~2.04  
+SR: 1.0
+
+##### population = 10, max_generations = 500, tournament_size = 5, pcross = 0.8:
+AES: ~42.65  
+SR: ~0.862
+
+
+## Fazit:
+Diese guten Werte lassen sich hauptsächlich auf die Verwendung von 8 verschieden möglichen Farben, und die einfachere Natur des Problems zurückführen. Es wird nach einer bestimmten Anordnung dreier Zahlen gesucht, was bei hohen Populationsmengen schon schnell in der Starteingabe enthalten ist.  
+Ich habe auch hier das Mutieren der Kinder probiert. Hier konnte ich die Werte des 2. Beispiel von oben (population = 10, max_generations = 500, tournament_size = 5, pcross = 0.8, pmut=1/18) auf eine durchschnittliche Generationenzahl bis zur Lösung von ~13.87 und eine Erfolgsrate von 100 % Steigern.
+
+
+
+
+# Aufgabe 3:
+
+## Randal Olsons "Heres Waldo":
+In dem gegebenen GitHub Repo habe ich mir den genetischen Algorithmus im Jupyter-Notebook angeschaut. Ein Individuum beschreibt hier einen Weg zwischen allen 68 Datenpunkten, die Fitnessfunktion berechnet den gesamtweg zwischen allen Punkten der Lösung, da hier nach dem kürzesten Weg gesucht wird, soll der Fitness-Wert so klein wie möglich sein. Er verwendet zwei arten von Mutationen: Eine Gen-Mutation, in der 1 bis 3 Anordnungen an Wegen verändert werden und eine Shuffle-Mutation, in der ein zufälliger Teil des Weges an eine andere Stelle im Pfad verschoben wird.
+Die Gen-Mutation ist hier vergleichbar mit meiner Mutation, während die Shuffle-Mutation ähnlich zu Crossover mutation ist.
+
+
+## Evolution Simulator:
+Ein Individuum besteht aus Muskeln und Knoten. Die Muskeln haben verschiedenen Längen (Angespannt und Entspannt) und haben verschiedenen Zeiten zu denen sie sich Ent- oder Anspannen. Sie üben eine Kraft auf die Knoten aus, die sich dadurch bewegen. Die Individuuen werden nach zurückgelegter Distanz innerhalb von 15 Sekunden bewertet. Eine 

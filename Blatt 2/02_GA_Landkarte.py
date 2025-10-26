@@ -25,24 +25,24 @@ def decode_data(problem, chunk_size):
     return [int(problem[i:i+chunk_size], 2) for i in range(0, len(problem), chunk_size)] # decode problem from bitstring to integer array
 
 
-def fitness_8_queens(individual):
+def fitness_landkarte(individual):
     data = decode_data(individual.problem, 3)
-    conflicts = 0
+    fitness = 0
 
-    for i in range(0, len(data)):
-        for j in range(0, len(data)):
-            if i != j:
-                if data[i] == data[j]:
-                    conflicts += 1
-            if j != 0:
-                if i - j >= 0:
-                    if data[i - j] - j == data[i] or data[i - j] + j == data[i]:
-                        conflicts += 1
-                if i + j <= len(data) - 1:
-                    if data[i + j] - j == data[i] or data[i + j] + j == data[i]:
-                        conflicts += 1
+    if data[0] != data[1]: # Color of A != Color of B
+        fitness += 5
+    if data[1] != data[2]: # B != C
+        fitness += 5
+    if data[2] != data[3]: # C != D
+        fitness += 5
+    if data[3] != data[4]: # D != E
+        fitness += 5
+    if data[0] != data[2]: # A != C
+        fitness += 5
+    if data[1] != data[3]: # B != D
+        fitness += 5
 
-    return 56 - conflicts
+    return fitness - len(list(set(data))) # subtract the numbers of colors in the array from fitness, to get the solution requiring the least colors
 
 
 def tournament_selection(population, tournament_size):
@@ -77,7 +77,7 @@ def crossover(mating_pool, pcross, include_mutation):
             children.append(b)
 
     if include_mutation:
-        children = mutate(children, 1/24)
+        children = mutate(children, 1/18)
 
     children.extend(mating_pool)
     return children
@@ -98,7 +98,7 @@ def mutate(population, pmut):
 
 def evaluate_population(population):
     for i in population:
-        i.fitness = fitness_8_queens(i)
+        i.fitness = fitness_landkarte(i)
     best = max(population, key=lambda x: x.fitness)
     average = sum(x.fitness for x in population) / len(population)
     worst = min(population, key=lambda x: x.fitness)
@@ -117,8 +117,6 @@ def genetic_algorith(population_size, max_generations, fitness_cap, tournament_s
     while len(population) < population_size:
         population.append(Individual(
             encode_data([random.randint(0, 7),
-             random.randint(0, 7),
-             random.randint(0, 7),
              random.randint(0, 7),
              random.randint(0, 7),
              random.randint(0, 7),
@@ -161,13 +159,14 @@ def genetic_algorith(population_size, max_generations, fitness_cap, tournament_s
     return generation, False
 
 
+
 def evaluate_algorithm(n):
     data_generation = []
     data_finished = []
     counter_finished = 0
 
     while n > 0:
-        generation, finished = genetic_algorith(100, 500, 56, 10, 0.8, include_mutation=True)
+        generation, finished = genetic_algorith(10, 500, 27, 5, 0.8, include_mutation=True)
         if finished:
             counter_finished += 1
         data_generation.append(generation)
@@ -189,5 +188,5 @@ def evaluate_algorithm(n):
 
 
 
-evaluate_algorithm(400)
-# genetic_algorith(100, 1000, 56, 10,  0.8, verbose=True, include_mutation=True)
+evaluate_algorithm(5000)
+# genetic_algorith(10, 1000, 27, 5,  0.8, verbose=True, include_mutation=False)
