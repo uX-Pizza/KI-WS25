@@ -84,6 +84,8 @@ SR: ~0.862
 Diese guten Werte lassen sich hauptsächlich auf die Verwendung von 8 verschieden möglichen Farben, und die einfachere Natur des Problems zurückführen. Es wird nach einer bestimmten Anordnung dreier Zahlen gesucht, was bei hohen Populationsmengen schon schnell in der Starteingabe enthalten ist.  
 Ich habe auch hier das Mutieren der Kinder probiert. Hier konnte ich die Werte des 2. Beispiel von oben (population = 10, max_generations = 500, tournament_size = 5, pcross = 0.8, pmut=1/18) auf eine durchschnittliche Generationenzahl bis zur Lösung von ~13.87 und eine Erfolgsrate von 100 % Steigern.
 
+## Simulated Annealing:
+Um die Probleme mit Simulated Annealing lösen zu können, bräuchte man jeweils Abkühlungspläne, die an das jeweilige Problem angepasst sind, um das "festsetzen" in lokalen Maxima der Kostenfunktion zu verhindern. 
 
 
 
@@ -95,4 +97,8 @@ Die Gen-Mutation ist hier vergleichbar mit meiner Mutation, während die Shuffle
 
 
 ## Evolution Simulator:
-Ein Individuum besteht aus Muskeln und Knoten. Die Muskeln haben verschiedenen Längen (Angespannt und Entspannt) und haben verschiedenen Zeiten zu denen sie sich Ent- oder Anspannen. Sie üben eine Kraft auf die Knoten aus, die sich dadurch bewegen. Die Individuuen werden nach zurückgelegter Distanz innerhalb von 15 Sekunden bewertet. Eine 
+Ein Individuum besteht aus Muskeln und Knoten. Die Muskeln haben verschiedenen Längen (Angespannt und Entspannt) und haben verschiedenen Zeiten zu denen sie sich Ent- oder Anspannen. Sie üben eine Kraft auf die Knoten aus, die sich dadurch bewegen. Die Individuuen werden nach zurückgelegter Distanz innerhalb von 15 Sekunden bewertet. Eine Mutation kann eine Änderung der Muskelparameter, das Löschen eines Muskels oder eines Knotens, sowie das Hinzufügen von Knoten oder Muskeln sein.
+
+
+## American Fuzzy Lop:
+Die Website hat leider auf allen möglichen Geräten nicht funktioniert.
