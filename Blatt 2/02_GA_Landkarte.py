@@ -188,5 +188,5 @@ def evaluate_algorithm(n):
 
 
 
-evaluate_algorithm(5000)
-# genetic_algorith(10, 1000, 27, 5,  0.8, verbose=True, include_mutation=False)
+# evaluate_algorithm(5000)
+genetic_algorith(10, 1000, 27, 5,  0.8, verbose=True, include_mutation=False)

@@ -1,8 +1,9 @@
 # Aufgabe 1/2:
 ## 8 Queens:
 Das Problem wird von den Individuen wie folgt beschrieben:  
-Alle Positionen der Damen werden in einem Array gespeichert, der Index beschreibt die Spalte und die Zahl am bestimmten Index beschreibt die Spalte, in der die Dame steht.
+Alle Positionen der Damen werden in einem Array gespeichert, der Index beschreibt die Spalte und die Zahl am bestimmten Index beschreibt die Reihe, in der die Dame steht.
 Die indizes, welche die Zeile der Dame beschreiben befinden sich im Raum 0-7, um den Indizes des Arrays zu ähneln, und um im Binärstring von 000 bis 111 dargestellt werden zu können, was das Crossover erleichtert.
+Die Fitnessfunktion liefert einen Wert von 0 bis 56 entsprechend der Konflikte, die eine Lösung aufweist, pro Konflikt wird ein Punkt der Fitness abgezogen. Um die Lösungen zu weiterzuentwickeln habe ich mich für Crossover entschieden, da in den Bits leicht Grenzen gezogen und vertauscht werden kann. 
 
 
 ## Parameter:
@@ -65,7 +66,7 @@ Die besten Ergebnisse habe ich erzielt, wenn ich das Kreuzen der Eltern mit eine
 
 
 ## Landkarten Einfärben:
-Um das Problem zu lösen habe ich den Algorithmus vom 8 Damen Problem übernommen und die Fitnessfunktion angepasst, um die Anforderungen aus dem Constraint-Graphen abzubilden. Für jede richtige Farbanordnung wird der Fitness-Score um 3 erhöht, und für jede verwendete Farbe wird ein Punkt abgezogen. Wie oben sind verschiedenen Farben als Zahlen kodiert, im Bitstring belegt eine Zahl drei Bits und kann daher die Zahlen von 0 bis 7 darstellen.
+Um das Problem zu lösen habe ich den Algorithmus vom 8 Damen Problem übernommen und die Fitnessfunktion angepasst, um die Anforderungen aus dem Constraint-Graphen abzubilden. Für jede richtige Farbanordnung wird der Fitness-Score um 3 erhöht, und für jede verwendete Farbe wird ein Punkt abgezogen. Wie oben sind verschiedenen Farben als Zahlen kodiert, im Bitstring belegt eine Zahl drei Bits und kann daher die Zahlen von 0 bis 7 (8 Farben) darstellen.
 
 ## Parameter:
 Stichprobenmenge = 5000
@@ -85,7 +86,7 @@ Diese guten Werte lassen sich hauptsächlich auf die Verwendung von 8 verschiede
 Ich habe auch hier das Mutieren der Kinder probiert. Hier konnte ich die Werte des 2. Beispiel von oben (population = 10, max_generations = 500, tournament_size = 5, pcross = 0.8, pmut=1/18) auf eine durchschnittliche Generationenzahl bis zur Lösung von ~13.87 und eine Erfolgsrate von 100 % Steigern.
 
 ## Simulated Annealing:
-Um die Probleme mit Simulated Annealing lösen zu können, bräuchte man jeweils Abkühlungspläne, die an das jeweilige Problem angepasst sind, um das "festsetzen" in lokalen Maxima der Kostenfunktion zu verhindern. 
+Um die Probleme mit Simulated Annealing lösen zu können, bräuchte man jeweils Abkühlungspläne, die an das jeweilige Problem angepasst sind, um das "festsetzen" in lokalen Maxima der Kostenfunktion (Fitnessfunktion) zu verhindern. 
 
 
 
@@ -97,7 +98,7 @@ Die Gen-Mutation ist hier vergleichbar mit meiner Mutation, während die Shuffle
 
 
 ## Evolution Simulator:
-Ein Individuum besteht aus Muskeln und Knoten. Die Muskeln haben verschiedenen Längen (Angespannt und Entspannt) und haben verschiedenen Zeiten zu denen sie sich Ent- oder Anspannen. Sie üben eine Kraft auf die Knoten aus, die sich dadurch bewegen. Die Individuuen werden nach zurückgelegter Distanz innerhalb von 15 Sekunden bewertet. Eine Mutation kann eine Änderung der Muskelparameter, das Löschen eines Muskels oder eines Knotens, sowie das Hinzufügen von Knoten oder Muskeln sein.
+Ein Individuum besteht aus Muskeln und Knoten. Die Muskeln haben verschiedenen Längen (Angespannt und Entspannt) und haben verschiedenen Zeiten zu denen sie sich Ent- oder Anspannen. Sie üben eine Kraft auf die Knoten aus, die sich dadurch bewegen. Die Individuen werden nach zurückgelegter Distanz innerhalb von 15 Sekunden bewertet. Eine Mutation kann eine Änderung der Muskelparameter, das Löschen eines Muskels oder eines Knotens, sowie das Hinzufügen von Knoten oder Muskeln sein.
 
 
 ## American Fuzzy Lop:
