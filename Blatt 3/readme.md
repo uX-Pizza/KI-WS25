@@ -10,7 +10,7 @@ D = 1
 A = 3
 
 ## Aufgabe 1.2:
-(Siehe 02_)
+(Siehe 01_05_trees.jpg)
 
 ## Aufgabe 1.3:
 Eine andere Anordnung würde hier keinen Unterschied machen, da durch B und E bereits die niedrigsten Grenzen festgelegt werden, und so bereits die meist möglichen Knoten abgeschnitten werden.
@@ -57,4 +57,4 @@ Eval = 3 * 1 + 2 - (3 * 1 + 1) = 1
 Eine solche Evaluierungsfunktion könnte sinnvoll sein, da sie gegebenenfalls vorliegende Vorteile für den einen oder anderen Spieler heraushebt, und so im wechsel von Minimieren und Maximieren weniger Werte "verloren" gehen.
 
 # Aufgabe 5:
-(Siehe 02_05_trees.jpg)
+(Siehe 01_05_trees.jpg)
