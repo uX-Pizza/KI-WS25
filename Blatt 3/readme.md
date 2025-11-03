@@ -9,10 +9,10 @@ C = 2
 D = 1  
 A = 3
 
-## Aufgabe 1.2:
+## 1.2:
 (Siehe 01_05_trees.jpg)
 
-## Aufgabe 1.3:
+## 1.3:
 Eine andere Anordnung würde hier keinen Unterschied machen, da durch B und E bereits die niedrigsten Grenzen festgelegt werden, und so bereits die meist möglichen Knoten abgeschnitten werden.
 
 
